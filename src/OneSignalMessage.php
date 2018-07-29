@@ -6,251 +6,259 @@ use Illuminate\Support\Arr;
 
 class OneSignalMessage
 {
-    /** @var string */
-    protected $body;
+	/** @var string */
+	protected $body;
 
-    /** @var string */
-    protected $subject;
+	/** @var string */
+	protected $subject;
 
-    /** @var string */
-    protected $url;
+	/** @var string */
+	protected $url;
 
-    /** @var string */
-    protected $icon;
+	/** @var string */
+	protected $icon;
 
-    /** @var array */
-    protected $data = [];
+	/** @var array */
+	protected $data = [];
 
-    /** @var array */
-    protected $buttons = [];
+	/** @var array */
+	protected $buttons = [];
 
-    /** @var array */
-    protected $webButtons = [];
+	/** @var array */
+	protected $webButtons = [];
 
-    /** @var array */
-    protected $extraParameters = [];
+	/** @var array */
+	protected $extraParameters = [];
 
-    /**
-     * @param string $body
-     *
-     * @return static
-     */
-    public static function create($body = '')
-    {
-        return new static($body);
-    }
+	/**
+	 * @param string $body
+	 *
+	 * @return static
+	 */
+	public static function create($body = '')
+	{
+		return new static($body);
+	}
 
-    /**
-     * @param string $body
-     */
-    public function __construct($body = '')
-    {
-        $this->body = $body;
-    }
+	/**
+	 * @param string $body
+	 */
+	public function __construct($body = '')
+	{
+		$this->body = $body;
+	}
 
-    /**
-     * Set the message body.
-     *
-     * @param string $value
-     *
-     * @return $this
-     */
-    public function body($value)
-    {
-        $this->body = $value;
+	/**
+	 * Set the message body.
+	 *
+	 * @param string $value
+	 *
+	 * @return $this
+	 */
+	public function body($value)
+	{
+		$this->body = $value;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * Set the message icon.
-     *
-     * @param string $value
-     *
-     * @return $this
-     */
-    public function icon($value)
-    {
-        $this->icon = $value;
+	/**
+	 * Set the message icon.
+	 *
+	 * @param string $value
+	 *
+	 * @return $this
+	 */
+	public function icon($value)
+	{
+		$this->icon = $value;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * Set the message subject.
-     *
-     * @param string $value
-     *
-     * @return $this
-     */
-    public function subject($value)
-    {
-        $this->subject = $value;
+	/**
+	 * Set the message subject.
+	 *
+	 * @param string $value
+	 *
+	 * @return $this
+	 */
+	public function subject($value)
+	{
+		$this->subject = $value;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * Set the message url.
-     *
-     * @param string $value
-     *
-     * @return $this
-     */
-    public function url($value)
-    {
-        $this->url = $value;
+	/**
+	 * Set the message url.
+	 *
+	 * @param string $value
+	 *
+	 * @return $this
+	 */
+	public function url($value)
+	{
+		$this->url = $value;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * Set the iOS badge increment count.
-     *
-     * @param int $count
-     *
-     * @return $this
-     */
-    public function incrementIosBadgeCount($count = 1)
-    {
-        return $this->setParameter('ios_badgeType', 'Increase')
-                    ->setParameter('ios_badgeCount', $count);
-    }
+	/**
+	 * Set the iOS badge increment count.
+	 *
+	 * @param int $count
+	 *
+	 * @return $this
+	 */
+	public function incrementIosBadgeCount($count = 1)
+	{
+		return $this->setParameter('ios_badgeType', 'Increase')
+					->setParameter('ios_badgeCount', $count);
+	}
 
-    /**
-     * Set the iOS badge decrement count.
-     *
-     * @param int $count
-     *
-     * @return $this
-     */
-    public function decrementIosBadgeCount($count = 1)
-    {
-        return $this->setParameter('ios_badgeType', 'Increase')
-                    ->setParameter('ios_badgeCount', -1 * $count);
-    }
+	/**
+	 * Set the iOS badge decrement count.
+	 *
+	 * @param int $count
+	 *
+	 * @return $this
+	 */
+	public function decrementIosBadgeCount($count = 1)
+	{
+		return $this->setParameter('ios_badgeType', 'Increase')
+					->setParameter('ios_badgeCount', -1 * $count);
+	}
 
-    /**
-     * Set the iOS badge count.
-     *
-     * @param int $count
-     *
-     * @return $this
-     */
-    public function setIosBadgeCount($count)
-    {
-        return $this->setParameter('ios_badgeType', 'SetTo')
-                    ->setParameter('ios_badgeCount', $count);
-    }
+	/**
+	 * Set the iOS badge count.
+	 *
+	 * @param int $count
+	 *
+	 * @return $this
+	 */
+	public function setIosBadgeCount($count)
+	{
+		return $this->setParameter('ios_badgeType', 'SetTo')
+					->setParameter('ios_badgeCount', $count);
+	}
 
-    /**
-     * Set additional data.
-     *
-     * @param string $key
-     * @param string $value
-     *
-     * @return $this
-     */
-    public function setData($key, $value)
-    {
-        $this->data[$key] = $value;
+	/**
+	 * Set additional data.
+	 *
+	 * @param string $key
+	 * @param string $value
+	 *
+	 * @return $this
+	 */
+	public function setData($key, $value)
+	{
+		$this->data[$key] = $value;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * Set additional parameters.
-     *
-     * @param string $key
-     * @param string $value
-     *
-     * @return $this
-     */
-    public function setParameter($key, $value)
-    {
-        $this->extraParameters[$key] = $value;
+	/**
+	 * Set additional parameters.
+	 *
+	 * @param string $key
+	 * @param string $value
+	 *
+	 * @return $this
+	 */
+	public function setParameter($key, $value)
+	{
+		$this->extraParameters[$key] = $value;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * Add a web button to the message.
-     *
-     * @param OneSignalWebButton $button
-     *
-     * @return $this
-     */
-    public function webButton(OneSignalWebButton $button)
-    {
-        $this->webButtons[] = $button->toArray();
+	/**
+	 * Add a web button to the message.
+	 *
+	 * @param OneSignalWebButton $button
+	 *
+	 * @return $this
+	 */
+	public function webButton(OneSignalWebButton $button)
+	{
+		$this->webButtons[] = $button->toArray();
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * Add a native button to the message.
-     *
-     * @param OneSignalButton $button
-     *
-     * @return $this
-     */
-    public function button(OneSignalButton $button)
-    {
-        $this->buttons[] = $button->toArray();
+	/**
+	 * Add a native button to the message.
+	 *
+	 * @param OneSignalButton $button
+	 *
+	 * @return $this
+	 */
+	public function button(OneSignalButton $button)
+	{
+		$this->buttons[] = $button->toArray();
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * Set an image to all possible attachment variables.
-     * @param string $imageUrl
-     *
-     * @return $this
-     */
-    public function setImageAttachments($imageUrl)
-    {
-        $this->extraParameters['ios_attachments']['id1'] = $imageUrl;
-        $this->extraParameters['big_picture'] = $imageUrl;
-        $this->extraParameters['adm_big_picture'] = $imageUrl;
-        $this->extraParameters['chrome_big_picture'] = $imageUrl;
+	/**
+	 * Set an image to all possible attachment variables.
+	 * @param string $imageUrl
+	 *
+	 * @return $this
+	 */
+	public function setImageAttachments($imageUrl)
+	{
+		$this->extraParameters['ios_attachments']['id1'] = $imageUrl;
+		$this->extraParameters['big_picture'] = $imageUrl;
+		$this->extraParameters['adm_big_picture'] = $imageUrl;
+		$this->extraParameters['chrome_big_picture'] = $imageUrl;
 
-        return $this;
-    }
+		return $this;
+	}
 
-    /**
-     * @return array
-     */
-    public function toArray()
-    {
-        $message = [
-            'contents' => ['en' => $this->body],
-            'headings' => $this->subjectToArray(),
-            'url' => $this->url,
-            'buttons' => $this->buttons,
-            'web_buttons' => $this->webButtons,
-            'chrome_web_icon' => $this->icon,
-            'chrome_icon' => $this->icon,
-            'adm_small_icon' => $this->icon,
-            'small_icon' => $this->icon,
-        ];
+	/**
+	 * @return array
+	 */
+	public function toArray()
+	{
+		$message = [
+			'url' => $this->url,
+			'buttons' => $this->buttons,
+			'web_buttons' => $this->webButtons,
+			'chrome_web_icon' => $this->icon,
+			'chrome_icon' => $this->icon,
+			'adm_small_icon' => $this->icon,
+			'small_icon' => $this->icon,
+		];
 
-        foreach ($this->extraParameters as $key => $value) {
-            Arr::set($message, $key, $value);
-        }
+		if(!empty($this->body)) {
+			$message['contents'] = [ 'en' => $this->body ];
+		}
 
-        foreach ($this->data as $data => $value) {
-            Arr::set($message, 'data.'.$data, $value);
-        }
+		$subject = $this->subjectToArray();
 
-        return $message;
-    }
+		if(!empty($subject)) {
+			$message['headings'] = $subject;
+		}
 
-    protected function subjectToArray()
-    {
-        if ($this->subject === null) {
-            return [];
-        }
+		foreach ($this->extraParameters as $key => $value) {
+			Arr::set($message, $key, $value);
+		}
 
-        return ['en' => $this->subject];
-    }
+		foreach ($this->data as $data => $value) {
+			Arr::set($message, 'data.'.$data, $value);
+		}
+
+		return $message;
+	}
+
+	protected function subjectToArray()
+	{
+		if ($this->subject === null) {
+			return [];
+		}
+
+		return ['en' => $this->subject];
+	}
 }
